@@ -1,0 +1,89 @@
+package Util;
+
+import Model.Customer;
+import Model.Order;
+import Model.Tariff;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import java.io.File;
+
+/**
+ * Created by Кирилл on 04.11.2015.
+ */
+public final class ModelFacade {
+    private ModelItemCollection<Customer> Customers = new ModelItemCollection<>();
+    private ModelItemCollection<Order> Orders = new ModelItemCollection<>();
+    private ModelItemCollection<Tariff> Tariffs = new ModelItemCollection<>();
+
+    private static ModelFacade instance = null;
+
+    private ModelFacade(){}
+
+    public static synchronized ModelFacade getInstance(){
+        if(instance == null){
+            instance = new ModelFacade();
+        }
+        return instance;
+    }
+
+    public void setCustomers(ModelItemCollection<Customer> Customers){
+        this.Customers = Customers;
+    }
+
+    public void setOrders(ModelItemCollection<Order> Orders){
+        this.Orders = Orders;
+    }
+
+    public void setTariffs(ModelItemCollection<Tariff> Tariffs){
+        this.Tariffs = Tariffs;
+    }
+
+    public ModelItemCollection<Customer> getCustomers(){
+        return Customers;
+    }
+
+    public ModelItemCollection<Order> getOrders(){
+        return Orders;
+    }
+
+    public ModelItemCollection<Tariff> getTariffs(){
+        return Tariffs;
+    }
+
+    public void writeObjects(String filename,ModelItemCollection models){
+        try {
+            File file = new File(filename);
+
+            JAXBContext jaxbContext = JAXBContext.newInstance(ModelItemCollection.class);
+            Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+
+            jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            jaxbMarshaller.marshal(models, file);
+            jaxbMarshaller.marshal(models, System.out);
+
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public ModelItemCollection readObjects(String filename){
+        ModelItemCollection modcoll = new ModelItemCollection();
+        try {
+
+            File file = new File(filename);
+            JAXBContext jaxbContext = JAXBContext.newInstance(ModelItemCollection.class);
+
+            Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+            modcoll = (ModelItemCollection) jaxbUnmarshaller.unmarshal(file);
+            System.out.println(modcoll);
+
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+        return modcoll;
+    }
+
+}

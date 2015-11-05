@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<modelItemCollection>
-    <Model>
-        <Number>123466666</Number>
-        <Name>aaaaaaaa</Name>
-        <Speed>1928.37</Speed>
-        <Cost>987.654</Cost>
-    </Model>
-    <Model>
-        <Number>77766666</Number>
-        <Name>aaaaaaaabbbbb</Name>
-        <Speed>1928.3711</Speed>
-        <Cost>987.6554</Cost>
-    </Model>
-</modelItemCollection>
+<Collection>
+    <modIt>
+        <entry>
+            <key>5</key>
+            <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="tariff">
+                <Number>5</Number>
+                <Name>aaa</Name>
+                <Speed>6443.3</Speed>
+                <Cost>986.5</Cost>
+            </value>
+        </entry>
+    </modIt>
+</Collection>

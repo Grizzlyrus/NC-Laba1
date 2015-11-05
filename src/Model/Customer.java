@@ -7,15 +7,21 @@ import javax.xml.bind.annotation.XmlType;
  * Created by Кирилл on 27.10.2015.
  */
 
-@XmlType( propOrder = {"phonenum","adress"})
+@XmlType( propOrder = {"name","phonenum","adress"})
 public class Customer extends ModelItem{
-    int phonenum;
+    private String name;
+    String phonenum;
     String adress;
 
     public Customer(){}
 
+    @XmlElement(name = "Name")
+    public void setName(String name){
+        this.name = name;
+    }
+
     @XmlElement(name = "Phone number")
-    public void setPhonenum(int phonenum){
+    public void setPhonenum(String phonenum){
         this.phonenum = phonenum;
     }
 
@@ -24,7 +30,11 @@ public class Customer extends ModelItem{
         this.adress = adress;
     }
 
-    public int getPhonenum(){
+    public String getName(){
+        return  name;
+    }
+
+    public String getPhonenum(){
         return phonenum;
     }
 
@@ -32,5 +42,23 @@ public class Customer extends ModelItem{
         return adress;
     }
 
+//    @Override
+//    public int hashCode() {
+//        return 0;
+//    }
 
+    @Override
+    public boolean equals(Object a) {
+        if (a == null){return false;}
+        if (a == this){return true;}
+        if (getClass()!=a.getClass()) {return  false;}
+        Customer o = (Customer)a;
+        return (this.getNumber() == o.getNumber() && this.getName().equals(o.getName()) && this.getPhonenum().equals(o.getPhonenum()) && this.getAdress().equals(o.getAdress()));
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder strbuild = new StringBuilder();
+        return strbuild.append("Number ").append(this.getNumber()).append("; Name ").append(this.getName()).append("; Phone number ").append(this.getPhonenum()).append("; Adress ").append(this.getAdress()).toString();
+    }
 }
