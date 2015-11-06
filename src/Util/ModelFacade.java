@@ -53,6 +53,30 @@ public final class ModelFacade {
         return Tariffs;
     }
 
+    public Order getOrderById(int id){
+        return Orders.getModIt().get(id);
+    }
+
+    public Customer getCustomerById(int id){
+        return Customers.getModIt().get(id);
+    }
+
+    public Tariff getTariffById(int id){
+        return Tariffs.getModIt().get(id);
+    }
+
+    public void addTariff(Tariff tariff){
+        Tariffs.getModIt().put(tariff.getNumber(),tariff);
+    }
+
+    public void addCustomer(Customer customer){
+        Customers.getModIt().put(customer.getNumber(),customer);
+    }
+
+    public void addOrder(Order order){
+        Orders.getModIt().put(order.getNumber(), order);
+    }
+
     public void writeObjects(String filename,ModelItemCollection models){
         try {
             File file = new File(filename);

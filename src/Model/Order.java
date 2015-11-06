@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Created by Кирилл on 27.10.2015.
+ * Created by пїЅпїЅпїЅпїЅпїЅпїЅ on 27.10.2015.
  */
 
 @XmlType( propOrder = {"customernum","tariffnum","date","sum"})
@@ -80,6 +80,16 @@ public class Order extends ModelItem {
     public String toString() {
         StringBuilder strbuild = new StringBuilder();
         DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-        return strbuild.append("Number ").append(this.getNumber()).append("; Customer num. ").append(this.getCustomernum()).append("; Tariff num. ").append(this.getTariffnum()).append("; Date ").append(df.format(this.getDate())).append("; Sum. of order ").append(this.getSum()).toString();
+        return strbuild.append("Number ")
+                .append(this.getNumber())
+                .append("; Customer num. ")
+                .append(this.getCustomernum())
+                .append("; Tariff num. ")
+                .append(this.getTariffnum())
+                .append("; Date ")
+                .append(df.format(this.getDate()))
+                .append("; Sum. of order ")
+                .append(this.getSum())
+                .toString();
     }
 }

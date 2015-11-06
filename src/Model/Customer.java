@@ -4,7 +4,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- * Created by Кирилл on 27.10.2015.
+ * Created by пїЅпїЅпїЅпїЅпїЅпїЅ on 27.10.2015.
  */
 
 @XmlType( propOrder = {"name","phonenum","adress"})
@@ -59,6 +59,14 @@ public class Customer extends ModelItem{
     @Override
     public String toString() {
         StringBuilder strbuild = new StringBuilder();
-        return strbuild.append("Number ").append(this.getNumber()).append("; Name ").append(this.getName()).append("; Phone number ").append(this.getPhonenum()).append("; Adress ").append(this.getAdress()).toString();
+        return strbuild.append("Number ")
+                .append(this.getNumber())
+                .append("; Name ")
+                .append(this.getName())
+                .append("; Phone number ")
+                .append(this.getPhonenum())
+                .append("; Adress ")
+                .append(this.getAdress())
+                .toString();
     }
 }

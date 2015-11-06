@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- * Created by Кирилл on 27.10.2015.
+ * Created by пїЅпїЅпїЅпїЅпїЅпїЅ on 27.10.2015.
  */
 
 @XmlType( propOrder = {"name", "speed", "cost"})
@@ -62,7 +62,15 @@ public class Tariff extends ModelItem {
     @Override
     public String toString(){
         StringBuilder strbuild = new StringBuilder();
-        return strbuild.append("Number ").append(this.getNumber()).append("; Name ").append(this.getName()).append("; Speed ").append(this.getSpeed()).append("; Cost ").append(this.getCost()).toString();
+        return strbuild.append("Number ")
+                .append(this.getNumber())
+                .append("; Name ")
+                .append(this.getName())
+                .append("; Speed ")
+                .append(this.getSpeed())
+                .append("; Cost ")
+                .append(this.getCost())
+                .toString();
     }
 
 }
