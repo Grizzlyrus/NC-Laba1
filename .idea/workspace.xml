@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c3e6e836-7e15-4fae-9ddd-0dda0b7e90ac" name="Default" comment="Realise show table, select row, add row">
-      <change type="MODIFICATION" beforePath="E:\Other\NC-Laba1\out\production\NC-Laba1\Controller\Controller.class" afterPath="E:\Other\NC-Laba1\out\production\NC-Laba1\Controller\Controller.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/Controller.java" afterPath="$PROJECT_DIR$/src/Controller/Controller.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Model/Customer.java" afterPath="$PROJECT_DIR$/src/Model/Customer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Util/ModelFacade.java" afterPath="$PROJECT_DIR$/src/Util/ModelFacade.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Model/Order.java" afterPath="$PROJECT_DIR$/src/Model/Order.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Model/Tariff.java" afterPath="$PROJECT_DIR$/src/Model/Tariff.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/View/View.java" afterPath="$PROJECT_DIR$/src/View/View.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+    <list default="true" id="c3e6e836-7e15-4fae-9ddd-0dda0b7e90ac" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="NC-Laba1.iws" />
@@ -95,7 +85,7 @@
       <file leaf-file-name="Tariff.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Model/Tariff.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.43432575" vertical-offset="619" max-vertical-offset="1190">
+            <state vertical-scroll-proportion="0.7162162" vertical-offset="602" max-vertical-offset="1190">
               <caret line="63" column="22" selection-start-line="63" selection-start-column="22" selection-end-line="63" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -173,10 +163,10 @@
         <option value="$PROJECT_DIR$/src/Model/ModelItemCollection.java" />
         <option value="$PROJECT_DIR$/src/Model/Order.java" />
         <option value="$PROJECT_DIR$/src/Model/Customer.java" />
-        <option value="$PROJECT_DIR$/src/Model/Tariff.java" />
         <option value="$PROJECT_DIR$/src/View/View.java" />
         <option value="$PROJECT_DIR$/src/Util/ModelFacade.java" />
         <option value="$PROJECT_DIR$/src/Controller/Controller.java" />
+        <option value="$PROJECT_DIR$/src/Model/Tariff.java" />
       </list>
     </option>
   </component>
@@ -645,18 +635,31 @@
       <workItem from="1446746014030" duration="144000" />
       <workItem from="1446796056865" duration="2560000" />
       <workItem from="1446804778778" duration="10133000" />
-      <workItem from="1446821824245" duration="10346000" />
+      <workItem from="1446821824245" duration="10747000" />
     </task>
+    <task id="LOCAL-00001" summary="Realise show table, select row, add row">
+      <created>1446832217408</created>
+      <option name="number" value="00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1446832217408</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Realise show table, select row, add row">
+      <created>1446832554557</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1446832554557</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="80599000" />
+    <option name="totallyTimeSpent" value="81000000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32843137" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32843137" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1169,7 +1172,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Model/Tariff.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43432575" vertical-offset="619" max-vertical-offset="1190">
+        <state vertical-scroll-proportion="0.7162162" vertical-offset="602" max-vertical-offset="1190">
           <caret line="63" column="22" selection-start-line="63" selection-start-column="22" selection-end-line="63" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
