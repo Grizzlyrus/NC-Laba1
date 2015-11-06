@@ -85,7 +85,7 @@
       <file leaf-file-name="Tariff.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Model/Tariff.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7162162" vertical-offset="602" max-vertical-offset="1190">
+            <state vertical-scroll-proportion="0.46409807" vertical-offset="602" max-vertical-offset="1190">
               <caret line="63" column="22" selection-start-line="63" selection-start-column="22" selection-end-line="63" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -635,7 +635,7 @@
       <workItem from="1446746014030" duration="144000" />
       <workItem from="1446796056865" duration="2560000" />
       <workItem from="1446804778778" duration="10133000" />
-      <workItem from="1446821824245" duration="10747000" />
+      <workItem from="1446821824245" duration="10801000" />
     </task>
     <task id="LOCAL-00001" summary="Realise show table, select row, add row">
       <created>1446832217408</created>
@@ -649,17 +649,23 @@
       <option name="project" value="LOCAL" />
       <updated>1446832554557</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Realise show table, select row, add row">
+      <created>1446832608275</created>
+      <option name="number" value="00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1446832608275</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="81000000" />
+    <option name="totallyTimeSpent" value="81054000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32843137" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32843137" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32843137" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1172,7 +1178,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Model/Tariff.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7162162" vertical-offset="602" max-vertical-offset="1190">
+        <state vertical-scroll-proportion="0.46409807" vertical-offset="602" max-vertical-offset="1190">
           <caret line="63" column="22" selection-start-line="63" selection-start-column="22" selection-end-line="63" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
