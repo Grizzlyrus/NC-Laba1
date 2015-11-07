@@ -25,23 +25,23 @@ public class Order extends ModelItem {
 
     public Order(){}
 
-    @XmlElement(name = "Customer number")
+    @XmlElement(name = "Customer_number")
     public void setCustomernum(int customernum){
         this.customernum = customernum;
     }
 
-    @XmlElement(name = "Tariff number")
+    @XmlElement(name = "Tariff_number")
     public void setTariffnum(int tariffnum){
-        this.tariffnum = tariffnum;;
+        this.tariffnum = tariffnum;
     }
 
-    @XmlElement(name = "Order date")
+    @XmlElement(name = "Order_date")
     @XmlJavaTypeAdapter(DateAdapter.class)
     public void setDate(Date date){
         this.date = date;
     }
 
-    @XmlElement(name = "Order sum")
+    @XmlElement(name = "Order_sum")
     public void setSum(double sum){
         this.sum = sum;
     }

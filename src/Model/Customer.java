@@ -20,7 +20,7 @@ public class Customer extends ModelItem{
         this.name = name;
     }
 
-    @XmlElement(name = "Phone number")
+    @XmlElement(name = "Phone_number")
     public void setPhonenum(String phonenum){
         this.phonenum = phonenum;
     }

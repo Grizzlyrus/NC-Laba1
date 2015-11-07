@@ -6,7 +6,7 @@
             <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="customer">
                 <Number>1234</Number>
                 <Name>qwerty</Name>
-                <Phone number>123547</Phone number>
+                <Phone_number>123547</Phone_number>
                 <Adress>Samara</Adress>
             </value>
         </entry>
