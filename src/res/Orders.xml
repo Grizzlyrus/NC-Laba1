@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Collection>
+    <modIt>
+        <entry>
+            <key>1234</key>
+            <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="order">
+                <Number>1234</Number>
+                <Customer number>1234</Customer number>
+                <Tariff number>1234</Tariff number>
+                <Order date>1994-02-22 23:20:00</Order date>
+                <Order sum>350.0</Order sum>
+            </value>
+        </entry>
+    </modIt>
+</Collection>

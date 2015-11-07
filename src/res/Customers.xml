@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Collection>
+    <modIt>
+        <entry>
+            <key>1234</key>
+            <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="customer">
+                <Number>1234</Number>
+                <Name>qwerty</Name>
+                <Phone number>123547</Phone number>
+                <Adress>Samara</Adress>
+            </value>
+        </entry>
+    </modIt>
+</Collection>
