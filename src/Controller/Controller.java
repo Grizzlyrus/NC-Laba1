@@ -47,11 +47,8 @@ public class Controller {
         currentMenu=MAIN_MENU;
         modelFacade=ModelFacade.getInstance();
     }
-//    private String[] orderHead = {"Order num.","Customer num.","Tariff num.","Date","Cost"};
-//    private String[] customerHead = {"Customer num.","Customer name", "Phone num.", "Adress"};
 //    private String[] tariffHead = {"Tariff num.","Tariff name","Speed","Cost"};
-
-public void run(){
+    public void run(){
     view.print(MAIN_MENU_STRING);
     view.read();
 }
@@ -96,12 +93,51 @@ public void analysis(String s){
     }
 }
 
-    private void checkNumberInput(String s, int i){
-        if ((Integer.parseInt(s)<=0)||(Integer.parseInt(s)>i)){
-            throw new IllegalArgumentException("Incorrect input value.\nValue must be between 1 and "+i+".");
+    private void executeMain(String s) {
+        checkNumberInput(s, 3);
+        switch (Integer.parseInt(s)){
+            case 1:
+                currentMenu=TABLE_MENU;
+                view.print(TABLE_MENU_STRING);
+                break;
+            case 2:
+                showAllTables();
+                //TODO Write code here [2] Show all tables
+                view.print(MAIN_MENU_STRING);
+                break;
+            case 3:
+                System.exit(0);
+                break;
         }
     }
 
+    private void executeTable(String s) {
+        checkNumberInput(s, 4);
+        switch (Integer.parseInt(s)){
+            case 1:
+                currentMenu=ACTION_MENU;
+                currentTable =ORDER_TABLE;
+                view.print(ACTION_MENU_STRING);
+                break;
+            case 2:
+                currentMenu=ACTION_MENU;
+                currentTable =CUSTOMER_TABLE;
+                view.print(ACTION_MENU_STRING);
+                break;
+            case 3:
+                currentMenu=ACTION_MENU;
+                currentTable =TARIFF_TABLE;
+                view.print(ACTION_MENU_STRING);
+                break;
+            case 4:
+                currentMenu=MAIN_MENU;
+                view.print(MAIN_MENU_STRING);
+                break;
+        }
+    }
+
+    //    private String[] orderHead = {"Order num.","Customer num.","Tariff num.","Date","Cost"};
+//    private String[] customerHead = {"Customer num.","Customer name", "Phone num.", "Adress"};
     private void executeAction(String s) {
         checkNumberInput(s,7);
         switch (Integer.parseInt(s)){
@@ -136,387 +172,10 @@ public void analysis(String s){
         }
     }
 
-    private void selectRow() {
-        switch (currentTable){
-            case ORDER_TABLE:
-                showOrder();
-                break;
-            case CUSTOMER_TABLE:
-                showCustomer();
-                break;
-            case TARIFF_TABLE:
-                showTariff();
-                break;
-        }
-    }
-
-    private void showTariff() {
-        String buffString ;
-        int number=0;
-        boolean isNum;
-        boolean isAvailable=false;
-        do{
-            view.print("Input id tariff");
-            buffString=view.readAtr();
-            isNum = isNumber(buffString);
-            if (isNum){
-                number=Integer.parseInt(buffString);
-                if (number == 0) {
-                    view.print("Return on prev menu");
-                    view.print(ACTION_MENU_STRING);
-                    return;
-                }
-                isAvailable = checkId(number,modelFacade.getTariffs());
-                if (isAvailable) {
-                    view.print("Id tariff not exist");
-                }
-            }
-        }while (!(isNum&&!isAvailable));
-        Tariff tariff=modelFacade.getTariffById(Integer.parseInt(buffString));
-        view.print("Tariff\nId: "+tariff.getNumber()+
-                "\nName:"+tariff.getName()+
-                "\nSpeed: "+tariff.getSpeed()+
-                "\nCost: " +tariff.getCost());
-        view.print("Enter something than back prev menu");
-        view.readAtr();
-        view.print(ACTION_MENU_STRING);
-    }
-
-    private void showCustomer() {
-        String buffString ;
-        int number=0;
-        boolean isNum;
-        boolean isAvailable=false;
-        do{
-            view.print("Input id customer");
-            buffString=view.readAtr();
-            isNum = isNumber(buffString);
-            if (isNum){
-                number=Integer.parseInt(buffString);
-                if (number == 0) {
-                    view.print("Return on prev menu");
-                    view.print(ACTION_MENU_STRING);
-                    return;
-                }
-                isAvailable = checkId(number,modelFacade.getCustomers());
-                if (isAvailable) {
-                    view.print("Id customer not exist");
-                }
-            }
-        }while (!(isNum&&!isAvailable));
-        Customer customer=modelFacade.getCustomerById(Integer.parseInt(buffString));
-        view.print("Customer\nId: "+customer.getNumber()+
-                "\nName:"+customer.getName()+
-                "\nPhone: "+customer.getPhonenum()+
-                "\nAddress: " +customer.getAdress());
-        view.print("Input something than back prev menu");
-        view.readAtr();
-        view.print(ACTION_MENU_STRING);
-    }
-
-    private void showOrder(){
-        String buffString ;
-        int number=0;
-        boolean isNum;
-        boolean isAvailable=false;
-        do{
-            view.print("input id order");
-            buffString=view.readAtr();
-            isNum = isNumber(buffString);
-            if (isNum){
-                number=Integer.parseInt(buffString);
-                if (number == 0) {
-                    view.print("Return on prev menu");
-                    view.print(ACTION_MENU_STRING);
-                    return;
-                }
-                isAvailable = checkId(number,modelFacade.getOrders());
-                if (isAvailable) {
-                    view.print("Id order not exist");
-                }
-            }
-        }while (!(isNum&&!isAvailable));
-        Order order=modelFacade.getOrderById(Integer.parseInt(buffString));
-        view.print("Order id: "+order.getNumber()+
-                "\nCustomer: id "+order.getCustomernum()+"name "+modelFacade.getCustomerById(order.getCustomernum())+
-                "\nTariff: id "+order.getTariffnum()+"name "+modelFacade.getTariffById(order.getTariffnum())+
-                "\nDate " + order.getDate()+
-                "\nSum: " + order.getSum());
-        view.print("Enter something than back prev menu");
-        view.readAtr();
-        view.print(ACTION_MENU_STRING);
-    }
-
-    private void addRow() {
-        switch (currentTable){
-            case ORDER_TABLE:
-                addOrder();
-                break;
-            case CUSTOMER_TABLE:
-                addCustomer();
-                break;
-            case TARIFF_TABLE:
-                addTariff();
-                break;
-        }
-        view.print("-------------------");
-        view.print("Enter something than back prev menu");
-        view.readAtr();
-        view.print(ACTION_MENU_STRING);
-    }
-
-    private void addTariff() {
-        Tariff tariff=new Tariff();
-        String buffString;
-        int number=0;
-        boolean isNum;
-        boolean isAvailable=false;
-        do {
-            view.print("Input id tariff");
-            buffString=view.readAtr();
-            isNum = isNumber(buffString);
-            if (isNum){
-                number=Integer.parseInt(buffString);
-                if (number == 0) {
-                    view.print("Return on prev menu");
-                    view.print(ACTION_MENU_STRING);
-                    return;
-                }
-                isAvailable = checkId(number,modelFacade.getTariffs());
-                if (!isAvailable) {
-                    view.print("Id already exist");
-                }
-            }
-        }while (!(isNum&&isAvailable));
-
-        tariff.setNumber(number);
-
-        do {
-            view.print("Input name customer");
-            buffString=view.readAtr();
-        }while (checkName(buffString));
-
-        tariff.setName(buffString);
-
-        do {
-            view.print("Input tariff speed (Mb/s)");
-            buffString=view.readAtr();
-        }while (checkDouble(buffString));
-
-        tariff.setSpeed(Double.parseDouble(buffString));
-
-        do {
-            view.print("Input tariff cost");
-            buffString=view.readAtr();
-        }while (checkDouble(buffString));
-
-        tariff.setCost(Double.parseDouble(buffString));
-
-        modelFacade.addTariff(tariff);
-
-        view.print("Tariff created");
-    }
-
-    private boolean checkDouble(String buffString) {
-        try {
-        if (Double.parseDouble(buffString)<0) {
-            view.print("Number must be > 0");
-            return true;
-        }else {
-            return false;
-        }
-        }catch (NumberFormatException e){
-            view.print("Input number");
-            return true;
-        }
-    }
-
-    private void addCustomer() {
-        Customer customer=new Customer();
-        String buffString;
-        int number=0;
-        boolean isNum;
-        boolean isAvailable=false;
-        do {
-            view.print("Input id customer");
-            buffString=view.readAtr();
-            isNum = isNumber(buffString);
-            if (isNum){
-                number=Integer.parseInt(buffString);
-                if (number == 0) {
-                    view.print("Return on prev menu");
-                    view.print(ACTION_MENU_STRING);
-                    return;
-                }
-                isAvailable = checkId(number,modelFacade.getCustomers());
-                if (!isAvailable) {
-                    view.print("Id already exist");
-                }
-            }
-        }while (!(isNum&&isAvailable));
-
-        customer.setNumber(number);
-
-        do {
-            view.print("Input name customer");
-            buffString=view.readAtr();
-        }while (checkName(buffString));
-
-        customer.setName(buffString);
-
-        do {
-            view.print("Input phone customer");
-            buffString=view.readAtr();
-        }while (checkPhone(buffString));
-
-        customer.setPhonenum(buffString);
-
-        do {
-            view.print("Input address customer");
-            buffString=view.readAtr();
-        }while (checkPhone(buffString));
-
-        customer.setAdress(buffString);
-
-        modelFacade.addCustomer(customer);
-        view.print("Customer created");
-
-    }
-
-    private boolean checkPhone(String buffString) {
-        //TODO add check phone
-        if (buffString.trim().equals("")) {
-            view.print("Input text should not be empty");
-            return true;
-        }
-        return false;
-    }
-
-    private boolean checkName(String buffString) {
-        if (buffString.trim().equals("")) {
-            view.print("Input text should not be empty");
-            return true;
-        }
-        return false;
-    }
-
-    private void addOrder() {
-        Order order =new Order();
-        String buffString;
-        int number=0;
-        boolean isNum;
-        boolean isAvailable = false;
-        do {
-            view.print("Input id order");
-            buffString=view.readAtr();
-            isNum = isNumber(buffString);
-            if (isNum){
-                number=Integer.parseInt(buffString);
-                if (number == 0) {
-                    view.print("Return on prev menu");
-                    view.print(ACTION_MENU_STRING);
-                    return;
-                }
-                isAvailable = checkId(number,modelFacade.getOrders());
-                if (!isAvailable) {
-                    view.print("Id already exist");
-                }
-            }
-        }while (!(isNum&&isAvailable));
-
-        order.setNumber(number);
-
-        do {
-            view.print("Input id customer");
-            buffString=view.readAtr();
-            isNum = isNumber(buffString);
-            if (isNum){
-                number=Integer.parseInt(buffString);
-                if (number == 0) {
-                    view.print("Return on prev menu");
-                    view.print(ACTION_MENU_STRING);
-                    return;
-                }
-                isAvailable = checkId(number,modelFacade.getCustomers());
-                if (isAvailable) {
-                    view.print("Id customer not exist");
-                }
-            }
-        }while (!(isNum&&!isAvailable));
-
-        order.setCustomernum(number);
-
-        do {
-            view.print("Input id tariff");
-            buffString = view.readAtr();
-            buffString = view.readAtr();
-            isNum = isNumber(buffString);
-            if (isNum) {
-                number = Integer.parseInt(buffString);
-                if (number == 0) {
-                    view.print("Return on prev menu");
-                    view.print(ACTION_MENU_STRING);
-                    return;
-                }
-                isAvailable = checkId(number, modelFacade.getTariffs());
-                if (isAvailable) {
-                    view.print("Id tariff not exist");
-                }
-            }
-        }while (!(isNum&&!isAvailable));
-
-        order.setTariffnum(number);
-
-
-        do {
-            view.print("Input Date");
-            buffString=view.readAtr();
-        }while (checkDate(buffString));
-
-        try {
-            order.setDate(dateFormat.parse(buffString));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        order.setSum(modelFacade.getTariffById(order.getTariffnum()).getCost());
-
-        modelFacade.addOrder(order);
-        view.print("Order created");
-    }
-
-    private boolean isNumber(String buffString) {
-        try {
-            int n=Integer.parseInt(buffString);
-            if (n <0) {
-                view.print("Number must b positive or 0");
-                return false;
-            }
-            return true;
-        }catch (NumberFormatException e){
-            view.print(e.getMessage());
-            return false;
-        }
-    }
-
-
-    private boolean checkDate(String buffString) {
-        try {
-            long delta= Calendar.getInstance().getTimeInMillis()-dateFormat.parse(buffString).getTime();
-            if (delta < 0) {
-                view.print("Input other date");
-                return true;
-            }else {
-                return false;
-            }
-        } catch (ParseException e) {
-            view.print("Incorrect date format");
-            return true;
-        }
-    }
-
-    private boolean checkId(int id, ModelItemCollection<?extends ModelItem> modelItemCollection) {
-         return modelItemCollection.getModIt().get(id) == null;
+    private void showAllTables() {
+        view.print(show(modelFacade.getOrders()));
+        view.print(show(modelFacade.getCustomers()));
+        view.print(show(modelFacade.getTariffs()));
     }
 
     private void showTable() {
@@ -537,6 +196,398 @@ public void analysis(String s){
         view.print(ACTION_MENU_STRING);
     }
 
+    private void addRow() {
+        switch (currentTable){
+            case ORDER_TABLE:
+                addOrder();
+                break;
+            case CUSTOMER_TABLE:
+                addCustomer();
+                break;
+            case TARIFF_TABLE:
+                addTariff();
+                break;
+        }
+        view.print("-------------------");
+        view.print("Enter enter than back prev menu");
+        view.readAtr();
+        view.print(ACTION_MENU_STRING);
+    }
+
+    private void selectRow() {
+        switch (currentTable){
+            case ORDER_TABLE:
+                showOrder();
+                break;
+            case CUSTOMER_TABLE:
+                showCustomer();
+                break;
+            case TARIFF_TABLE:
+                showTariff();
+                break;
+        }
+    }
+
+    private void addOrder() {
+        Order order =new Order();
+        String buffString;
+        int number=0;
+        boolean isNum;
+        boolean isAvailable = false;
+        do {
+            view.print("Input id order");
+            buffString=view.readAtr();
+            isNum = isNumber(buffString);
+            if (isNum){
+                number=Integer.parseInt(buffString);
+                if (number == 0) {
+                    return;
+                }
+                isAvailable = checkId(number,modelFacade.getOrders());
+                if (!isAvailable) {
+                    view.print("Id already exist");
+                }
+            }
+        }while (!(isNum&&isAvailable));
+
+        order.setNumber(number);
+
+        do {
+            view.print("Input id customer");
+            buffString=view.readAtr();
+            isNum = isNumber(buffString);
+            if (isNum){
+                number=Integer.parseInt(buffString);
+                if (number == 0) {
+                    return;
+                }
+                isAvailable = checkId(number,modelFacade.getCustomers());
+                if (isAvailable) {
+                    view.print("Id customer not exist");
+                }
+            }
+        }while (!(isNum&&!isAvailable));
+
+        order.setCustomernum(number);
+
+        do {
+            view.print("Input id tariff");
+            buffString = view.readAtr();
+            isNum = isNumber(buffString);
+            if (isNum) {
+                number = Integer.parseInt(buffString);
+                if (number == 0) {
+                    return;
+                }
+                isAvailable = checkId(number, modelFacade.getTariffs());
+                if (isAvailable) {
+                    view.print("Id tariff not exist");
+                }
+            }
+        }while (!(isNum&&!isAvailable));
+
+        order.setTariffnum(number);
+
+
+        do {
+            view.print("Input Date");
+            buffString=view.readAtr();
+            if ((isNumber(buffString))&&(Integer.parseInt(buffString) == 0)) {
+                return;
+            }
+        }while (checkDate(buffString));
+
+        try {
+            order.setDate(dateFormat.parse(buffString));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        order.setSum(modelFacade.getTariffById(order.getTariffnum()).getCost());
+
+        modelFacade.addOrder(order);
+        view.print("Order created");
+    }
+
+    private void addCustomer() {
+        Customer customer=new Customer();
+        String buffString;
+        int number=0;
+        boolean isNum;
+        boolean isAvailable=false;
+        do {
+            view.print("Input id customer");
+            buffString=view.readAtr();
+            isNum = isNumber(buffString);
+            if (isNum){
+                number=Integer.parseInt(buffString);
+                if (number == 0) {
+                    return;
+                }
+                isAvailable = checkId(number,modelFacade.getCustomers());
+                if (!isAvailable) {
+                    view.print("Id already exist");
+                }
+            }
+        }while (!(isNum&&isAvailable));
+
+        customer.setNumber(number);
+
+        do {
+            view.print("Input name customer");
+            buffString=view.readAtr();
+            if ((isNumber(buffString))&&(Integer.parseInt(buffString) == 0)) {
+                return;
+            }
+        }while (checkName(buffString));
+
+        customer.setName(buffString);
+
+        do {
+            view.print("Input phone customer");
+            buffString=view.readAtr();
+            if ((isNumber(buffString))&&(Integer.parseInt(buffString) == 0)) {
+                return;
+            }
+        }while (checkPhone(buffString));
+
+        customer.setPhonenum(buffString);
+
+        do {
+            view.print("Input address customer");
+            buffString=view.readAtr();
+            if ((isNumber(buffString))&&(Integer.parseInt(buffString) == 0)) {
+                return;
+            }
+        }while (checkName(buffString));
+
+        customer.setAdress(buffString);
+
+        modelFacade.addCustomer(customer);
+        view.print("Customer created");
+
+    }
+
+    private void addTariff() {
+        Tariff tariff=new Tariff();
+        String buffString;
+        int number=0;
+        boolean isNum;
+        boolean isAvailable=false;
+        do {
+            view.print("Input id tariff");
+            buffString=view.readAtr();
+            isNum = isNumber(buffString);
+            if (isNum){
+                number=Integer.parseInt(buffString);
+                if (number == 0) {
+                    return;
+                }
+                isAvailable = checkId(number,modelFacade.getTariffs());
+                if (!isAvailable) {
+                    view.print("Id already exist");
+                }
+            }
+        }while (!(isNum&&isAvailable));
+        tariff.setNumber(number);
+
+        do {
+            view.print("Input name tariff");
+            buffString=view.readAtr();
+            if ((isNumber(buffString))&&(Integer.parseInt(buffString) == 0)) {
+                return;
+            }
+        }while (checkName(buffString));
+
+        tariff.setName(buffString);
+
+        do {
+            view.print("Input tariff speed (Mb/s)");
+            buffString=view.readAtr();
+            if ((isNumber(buffString))&&(Integer.parseInt(buffString) == 0)) {
+                return;
+            }
+        }while (checkDouble(buffString));
+
+        tariff.setSpeed(Double.parseDouble(buffString));
+
+        do {
+            view.print("Input tariff cost");
+            buffString=view.readAtr();
+            if ((isNumber(buffString))&&(Integer.parseInt(buffString) == 0)) {
+                return;
+            }
+        }while (checkDouble(buffString));
+
+        tariff.setCost(Double.parseDouble(buffString));
+
+        modelFacade.addTariff(tariff);
+
+        view.print("Tariff created");
+    }
+
+    private void showOrder(){
+        String buffString ;
+        int number=0;
+        boolean isNum;
+        boolean isAvailable=false;
+        do{
+            view.print("input id order");
+            buffString=view.readAtr();
+            isNum = isNumber(buffString);
+            if (isNum){
+                number=Integer.parseInt(buffString);
+                if (number == 0) {
+                    return;
+                }
+                isAvailable = checkId(number,modelFacade.getOrders());
+                if (isAvailable) {
+                    view.print("Id order not exist");
+                }
+            }
+        }while (!(isNum&&!isAvailable));
+        Order order=modelFacade.getOrderById(Integer.parseInt(buffString));
+        view.print("Order id: "+order.getNumber()+
+                "\nCustomer: "+modelFacade.getCustomerById(order.getCustomernum())+
+                "\nTariff: "+modelFacade.getTariffById(order.getTariffnum())+
+                "\nDate " + order.getDate()+
+                "\nSum: " + order.getSum());
+        view.print("Enter something than back prev menu");
+        view.readAtr();
+        view.print(ACTION_MENU_STRING);
+    }
+
+    private void showCustomer() {
+        String buffString ;
+        int number=0;
+        boolean isNum;
+        boolean isAvailable=false;
+        do{
+            view.print("Input id customer");
+            buffString=view.readAtr();
+            isNum = isNumber(buffString);
+            if (isNum){
+                number=Integer.parseInt(buffString);
+                if (number == 0) {
+                    return;
+                }
+                isAvailable = checkId(number,modelFacade.getCustomers());
+                if (isAvailable) {
+                    view.print("Id customer not exist");
+                }
+            }
+        }while (!(isNum&&!isAvailable));
+        Customer customer=modelFacade.getCustomerById(Integer.parseInt(buffString));
+        view.print("Customer\nId: "+customer.getNumber()+
+                "\nName:"+customer.getName()+
+                "\nPhone: "+customer.getPhonenum()+
+                "\nAddress: " +customer.getAdress());
+        view.print("Input something than back prev menu");
+        view.readAtr();
+        view.print(ACTION_MENU_STRING);
+    }
+
+    private void showTariff() {
+        String buffString ;
+        int number=0;
+        boolean isNum;
+        boolean isAvailable=false;
+        do{
+            view.print("Input id tariff");
+            buffString=view.readAtr();
+            isNum = isNumber(buffString);
+            if (isNum){
+                number=Integer.parseInt(buffString);
+                if (number == 0) {
+                    return;
+                }
+                isAvailable = checkId(number,modelFacade.getTariffs());
+                if (isAvailable) {
+                    view.print("Id tariff not exist");
+                }
+            }
+        }while (!(isNum&&!isAvailable));
+        Tariff tariff=modelFacade.getTariffById(Integer.parseInt(buffString));
+        view.print("Tariff\nId: "+tariff.getNumber()+
+                "\nName:"+tariff.getName()+
+                "\nSpeed: "+tariff.getSpeed()+
+                "\nCost: " +tariff.getCost());
+        view.print("Enter something than back prev menu");
+        view.readAtr();
+        view.print(ACTION_MENU_STRING);
+    }
+
+    private void checkNumberInput(String s, int i){
+        if ((Integer.parseInt(s)<=0)||(Integer.parseInt(s)>i)){
+            throw new IllegalArgumentException("Incorrect input value.\nValue must be between 1 and "+i+".");
+        }
+    }
+
+    private boolean checkDouble(String buffString) {
+        try {
+        if (Double.parseDouble(buffString)<0) {
+            view.print("Number must be > 0");
+            return true;
+        }else {
+            return false;
+        }
+        }catch (NumberFormatException e){
+            view.print("Input number");
+            return true;
+        }
+    }
+
+
+    private boolean checkPhone(String buffString) {
+        //TODO add check phone
+        if (buffString.trim().equals("")) {
+            view.print("Input text should not be empty");
+            return true;
+        }
+        return false;
+    }
+
+    private boolean checkName(String buffString) {
+        if (buffString.trim().equals("")) {
+            view.print("Input text should not be empty");
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isNumber(String buffString) {
+        try {
+            int n=Integer.parseInt(buffString);
+            if (n <0) {
+                view.print("Number must b positive or 0");
+                return false;
+            }
+            return true;
+        }catch (NumberFormatException e){
+            view.print(e.getMessage());
+            return false;
+        }
+    }
+
+    private boolean checkDate(String buffString) {
+        try {
+            long delta= Calendar.getInstance().getTimeInMillis()-dateFormat.parse(buffString).getTime();
+            if (delta < 0) {
+                view.print("Input other date");
+                return true;
+            }else {
+                return false;
+            }
+        } catch (ParseException e) {
+            view.print("Incorrect date format");
+            return true;
+        }
+    }
+
+    private boolean checkId(int id, ModelItemCollection<?extends ModelItem> modelItemCollection) {
+         return modelItemCollection.getModIt().get(id) == null;
+    }
+
     private String show(ModelItemCollection< ? extends ModelItem> modelItemCollection) {
         HashMap<Integer,? extends ModelItem> modelItems=modelItemCollection.getModIt();
         StringBuilder s=new StringBuilder();
@@ -546,47 +597,6 @@ public void analysis(String s){
         }
 
         return s.toString();
-    }
-
-    private void executeTable(String s) {
-        checkNumberInput(s, 4);
-        switch (Integer.parseInt(s)){
-            case 1:
-                currentMenu=ACTION_MENU;
-                currentTable =ORDER_TABLE;
-                view.print(ACTION_MENU_STRING);
-                break;
-            case 2:
-                currentMenu=ACTION_MENU;
-                currentTable =CUSTOMER_TABLE;
-                view.print(ACTION_MENU_STRING);
-                break;
-            case 3:
-                currentMenu=ACTION_MENU;
-                currentTable =TARIFF_TABLE;
-                view.print(ACTION_MENU_STRING);
-                break;
-            case 4:
-                currentMenu=MAIN_MENU;
-                view.print(MAIN_MENU_STRING);
-                break;
-        }
-    }
-
-    private void executeMain(String s) {
-        checkNumberInput(s, 3);
-        switch (Integer.parseInt(s)){
-            case 1:
-                currentMenu=TABLE_MENU;
-                view.print(TABLE_MENU_STRING);
-                break;
-            case 2:
-                //TODO Write code here [2] Show all tables
-                break;
-            case 3:
-                System.exit(0);
-                break;
-        }
     }
 
     public static void main(String[] args) {

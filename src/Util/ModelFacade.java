@@ -11,7 +11,7 @@ import javax.xml.bind.Unmarshaller;
 import java.io.File;
 
 /**
- * Created by Кирилл on 04.11.2015.
+ * Created by пїЅпїЅпїЅпїЅпїЅпїЅ on 04.11.2015.
  */
 public final class ModelFacade {
     private ModelItemCollection<Customer> Customers = new ModelItemCollection<>();
@@ -25,6 +25,10 @@ public final class ModelFacade {
     public static synchronized ModelFacade getInstance(){
         if(instance == null){
             instance = new ModelFacade();
+            //TODO check this code
+            instance.setOrders(instance.readObjects("src/res/Orders.xml"));
+            instance.setCustomers(instance.readObjects("src/res/Customers.xml"));
+            instance.setTariffs(instance.readObjects("src/res/Tariffs.xml"));
         }
         return instance;
     }
@@ -65,16 +69,19 @@ public final class ModelFacade {
         return Tariffs.getModIt().get(id);
     }
 
-    public void addTariff(Tariff tariff){
-        Tariffs.getModIt().put(tariff.getNumber(),tariff);
+    public void addOrder(Order order){
+        Orders.getModIt().put(order.getNumber(), order);
+        writeObjects("src/res/Orders.xml",Orders);
     }
 
     public void addCustomer(Customer customer){
         Customers.getModIt().put(customer.getNumber(),customer);
+        writeObjects("src/res/Customers.xml",Customers);
     }
 
-    public void addOrder(Order order){
-        Orders.getModIt().put(order.getNumber(), order);
+    public void addTariff(Tariff tariff){
+        Tariffs.getModIt().put(tariff.getNumber(),tariff);
+        writeObjects("src/res/Tariffs.xml",Tariffs);
     }
 
     public void writeObjects(String filename,ModelItemCollection models){
