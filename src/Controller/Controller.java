@@ -105,7 +105,6 @@ public void analysis(String s){
                 break;
             case 2:
                 showAllTables();
-                //TODO Write code here [2] Show all tables
                 view.print(MAIN_MENU_STRING);
                 break;
             case 3:
@@ -143,12 +142,10 @@ public void analysis(String s){
         checkNumberInput(s,7);
         switch (Integer.parseInt(s)){
             case 1:
-                //TODO [1] Show table
                 //currentMenu=SHOW_MENU;
                 showTable();
                 break;
             case 2:
-                //TODO [2] Add row
                 //currentMenu=ADD_MENU;
                 addRow();
                 break;
@@ -157,13 +154,13 @@ public void analysis(String s){
                 break;
             case 4:
                 //TODO [4] Delete row
+                deleteRow();
                 break;
             case 5:
                 //TODO [5] Find row
                 findRow();
                 break;
             case 6:
-                //TODO [6] Select row
                 selectRow();
                 break;
             case 7:
@@ -218,6 +215,24 @@ public void analysis(String s){
         }
         view.print("-------------------");
         view.print("Press any key");
+        view.readAtr();
+        view.print(ACTION_MENU_STRING);
+    }
+
+    private void deleteRow() {
+        switch (currentTable){
+            case ORDER_TABLE:
+                deleteOrder();
+                break;
+            case CUSTOMER_TABLE:
+                deleteCustomer();
+                break;
+            case TARIFF_TABLE:
+                deleteTariff();
+                break;
+        }
+        view.print("-------------------");
+        view.print("Enter enter than back prev menu");
         view.readAtr();
         view.print(ACTION_MENU_STRING);
     }
@@ -453,6 +468,54 @@ public void analysis(String s){
         view.print("Order created");
     }
 
+    private void deleteOrder() {
+        String buffString;
+        boolean isNum;
+        int number=0;
+        boolean isAvailable=false;
+        do {
+            view.print("input id order");
+            buffString=view.readAtr();
+            isNum=isNumber(buffString);
+            if (isNum) {
+                number=Integer.parseInt(buffString);
+                if (number == 0) {
+                    return;
+                }
+                isAvailable = checkId(number,modelFacade.getOrders());
+                if (isAvailable) {
+                    view.print("This id order not exist");
+                }
+            }
+        }while (!(isNum&&!isAvailable));
+        Order order=modelFacade.getOrderById(Integer.parseInt(buffString));
+        view.print("Order id: "+order.getNumber()+
+                "\nCustomer: "+modelFacade.getCustomerById(order.getCustomernum())+
+                "\nTariff: "+modelFacade.getTariffById(order.getTariffnum())+
+                "\nDate " + order.getDate()+
+                "\nSum: " + order.getSum());
+        view.print("You want delete this order?");
+        view.print("[1] Yes\n[2] No");
+        do{
+            buffString=view.readAtr();
+            isNum=isNumber(buffString);
+            if (isNum) {
+                number=Integer.parseInt(buffString);
+                switch (number){
+                    case 1:
+                        modelFacade.removeOrder(order.getNumber());
+                        break;
+                    case 2:
+                        return;
+                    default:
+                        isNum=false;
+                        break;
+                }
+            }
+        }while (!isNum);
+
+    }
+
     private void addCustomer() {
         Customer customer=new Customer();
         String buffString;
@@ -512,6 +575,52 @@ public void analysis(String s){
 
     }
 
+    private void deleteCustomer() {
+        String buffString;
+        boolean isNum;
+        int number=0;
+        boolean isAvailable=false;
+        do {
+            view.print("input id customer");
+            buffString=view.readAtr();
+            isNum=isNumber(buffString);
+            if (isNum) {
+                number=Integer.parseInt(buffString);
+                if (number == 0) {
+                    return;
+                }
+                isAvailable = checkId(number,modelFacade.getCustomers());
+                if (isAvailable) {
+                    view.print("This id customer not exist");
+                }
+            }
+        }while (!(isNum&&!isAvailable));
+        Customer customer=modelFacade.getCustomerById(Integer.parseInt(buffString));
+        view.print("Customer\nId: " + customer.getNumber() +
+                "\nName:" + customer.getName() +
+                "\nPhone: " + customer.getPhonenum() +
+                "\nAddress: " + customer.getAdress());
+        view.print("You want delete this customer?");
+        view.print("[1] Yes\n[2] No");
+        do{
+            buffString=view.readAtr();
+            isNum=isNumber(buffString);
+            if (isNum) {
+                number=Integer.parseInt(buffString);
+                switch (number){
+                    case 1:
+                        modelFacade.removeCustomer(customer.getNumber());
+                        break;
+                    case 2:
+                        return;
+                    default:
+                        isNum=false;
+                        break;
+                }
+            }
+        }while (!isNum);
+    }
+
     private void addTariff() {
         Tariff tariff=new Tariff();
         String buffString;
@@ -568,6 +677,52 @@ public void analysis(String s){
         modelFacade.addTariff(tariff);
 
         view.print("Tariff created");
+    }
+
+    private void deleteTariff() {
+        String buffString;
+        boolean isNum;
+        int number=0;
+        boolean isAvailable=false;
+        do {
+            view.print("input id tariff");
+            buffString=view.readAtr();
+            isNum=isNumber(buffString);
+            if (isNum) {
+                number=Integer.parseInt(buffString);
+                if (number == 0) {
+                    return;
+                }
+                isAvailable = checkId(number,modelFacade.getTariffs());
+                if (isAvailable) {
+                    view.print("This id tariff not exist");
+                }
+            }
+        }while (!(isNum&&!isAvailable));
+        Tariff tariff=modelFacade.getTariffById(Integer.parseInt(buffString));
+        view.print("Tariff\nId: "+tariff.getNumber()+
+                "\nName:"+tariff.getName()+
+                "\nSpeed: "+tariff.getSpeed()+
+                "\nCost: " +tariff.getCost());
+        view.print("You want delete this tariff?");
+        view.print("[1] Yes\n[2] No");
+        do{
+            buffString=view.readAtr();
+            isNum=isNumber(buffString);
+            if (isNum) {
+                number=Integer.parseInt(buffString);
+                switch (number){
+                    case 1:
+                        modelFacade.removeTariff(tariff.getNumber());
+                        break;
+                    case 2:
+                        return;
+                    default:
+                        isNum=false;
+                        break;
+                }
+            }
+        }while (!isNum);
     }
 
     private void showOrder(){

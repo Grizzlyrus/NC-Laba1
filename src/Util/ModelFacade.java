@@ -83,7 +83,18 @@ public final class ModelFacade {
         Tariffs.getModIt().put(tariff.getNumber(),tariff);
         writeObjects("src/res/Tariffs.xml",Tariffs);
     }
-
+    public void removeOrder(int id){
+        Orders.getModIt().remove(id);
+        writeObjects("src/res/Orders.xml",Orders);
+    }
+    public void removeCustomer(int id){
+        Customers.getModIt().remove(id);
+        writeObjects("src/res/Customers.xml",Customers);
+    }
+    public void removeTariff(int id){
+        Tariffs.getModIt().remove(id);
+        writeObjects("src/res/Tariffs.xml",Tariffs);
+    }
     public void writeObjects(String filename,ModelItemCollection models){
         try {
             File file = new File(filename);
