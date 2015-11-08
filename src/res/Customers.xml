@@ -10,5 +10,14 @@
                 <Adress>Samara</Adress>
             </value>
         </entry>
+        <entry>
+            <key>1235</key>
+            <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="customer">
+                <Number>1235</Number>
+                <Name>Ivan</Name>
+                <Phone_number>89379848680</Phone_number>
+                <Adress>Samara</Adress>
+            </value>
+        </entry>
     </modIt>
 </Collection>

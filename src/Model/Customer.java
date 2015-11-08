@@ -59,7 +59,7 @@ public class Customer extends ModelItem{
     @Override
     public String toString() {
         StringBuilder strbuild = new StringBuilder();
-        return strbuild.append("Number ")
+        return strbuild.append("ID ")
                 .append(this.getNumber())
                 .append("; Name ")
                 .append(this.getName())

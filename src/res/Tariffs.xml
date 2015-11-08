@@ -10,5 +10,14 @@
                 <Cost>350.0</Cost>
             </value>
         </entry>
+        <entry>
+            <key>1235</key>
+            <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="tariff">
+                <Number>1235</Number>
+                <Name>SuperFast</Name>
+                <Speed>150.0</Speed>
+                <Cost>350.0</Cost>
+            </value>
+        </entry>
     </modIt>
 </Collection>

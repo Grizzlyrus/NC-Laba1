@@ -93,7 +93,6 @@ public final class ModelFacade {
 
             jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             jaxbMarshaller.marshal(models, file);
-            jaxbMarshaller.marshal(models, System.out);
 
         } catch (JAXBException e) {
             e.printStackTrace();
@@ -109,7 +108,6 @@ public final class ModelFacade {
 
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
             modcoll = (ModelItemCollection) jaxbUnmarshaller.unmarshal(file);
-            System.out.println(modcoll);
 
         } catch (JAXBException e) {
             e.printStackTrace();

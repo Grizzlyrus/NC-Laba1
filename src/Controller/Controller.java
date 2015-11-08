@@ -4,12 +4,14 @@ import Model.*;
 import Util.ModelFacade;
 import Util.ModelItemCollection;
 import View.View;
+import jdk.internal.util.xml.impl.Input;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 /**
  * Created by ������ on 27.10.2015.
@@ -37,7 +39,7 @@ public class Controller {
     private static final String MAIN_MENU_STRING ="[1] Select table\n[2] Show all tables\n[3] Exit";
     private static final String TABLE_MENU_STRING="[1] Order\n[2] Customer\n[3] Tariff\n[4] <-- Back";
     private static final String ACTION_MENU_STRING="[1] Show table\n[2] Add row\n[3] Redact row\n[4] Delete row\n" +
-            "[5] Find row\n[6] Select row\n[7] <-- Back";
+            "[5] Find rows\n[6] Select row\n[7] <-- Back";
 
     private int currentMenu;
     private int currentTable;
@@ -47,11 +49,12 @@ public class Controller {
         currentMenu=MAIN_MENU;
         modelFacade=ModelFacade.getInstance();
     }
-//    private String[] tariffHead = {"Tariff num.","Tariff name","Speed","Cost"};
+
     public void run(){
     view.print(MAIN_MENU_STRING);
     view.read();
 }
+
 public void analysis(String s){
     try {
         switch (currentMenu) {
@@ -136,8 +139,6 @@ public void analysis(String s){
         }
     }
 
-    //    private String[] orderHead = {"Order num.","Customer num.","Tariff num.","Date","Cost"};
-//    private String[] customerHead = {"Customer num.","Customer name", "Phone num.", "Adress"};
     private void executeAction(String s) {
         checkNumberInput(s,7);
         switch (Integer.parseInt(s)){
@@ -159,6 +160,7 @@ public void analysis(String s){
                 break;
             case 5:
                 //TODO [5] Find row
+                findRow();
                 break;
             case 6:
                 //TODO [6] Select row
@@ -173,25 +175,31 @@ public void analysis(String s){
     }
 
     private void showAllTables() {
+        view.print("Orders:");
         view.print(show(modelFacade.getOrders()));
+        view.print("Customers:");
         view.print(show(modelFacade.getCustomers()));
+        view.print("Tariffs:");
         view.print(show(modelFacade.getTariffs()));
     }
 
     private void showTable() {
         switch (currentTable){
             case ORDER_TABLE:
+                view.print("Orders:");
                 view.print(show(modelFacade.getOrders()));
                 break;
             case CUSTOMER_TABLE:
+                view.print("Customers:");
                 view.print(show(modelFacade.getCustomers()));
                 break;
             case TARIFF_TABLE:
+                view.print("Tariffs:");
                 view.print(show(modelFacade.getTariffs()));
                 break;
         }
         view.print("-------------------");
-        view.print("Enter something than back prev menu");
+        view.print("Press any key");
         view.readAtr();
         view.print(ACTION_MENU_STRING);
     }
@@ -209,7 +217,7 @@ public void analysis(String s){
                 break;
         }
         view.print("-------------------");
-        view.print("Enter enter than back prev menu");
+        view.print("Press any key");
         view.readAtr();
         view.print(ACTION_MENU_STRING);
     }
@@ -228,6 +236,142 @@ public void analysis(String s){
         }
     }
 
+    private void findRow() {
+        switch (currentTable){
+            case ORDER_TABLE:
+                findOrder();
+                break;
+            case CUSTOMER_TABLE:
+                findCustomer();
+                break;
+            case TARIFF_TABLE:
+                findTariff();
+                break;
+        }
+    }
+
+    private void findOrder(){
+        boolean isFind = false;
+        String buffString;
+        Pattern p1,p2,p3,p4,p5;
+        HashMap<Integer,Order> hm= ModelFacade.getInstance().getOrders().getModIt();
+        view.print("Input order ID pattern");
+        buffString = view.readAtr();
+        p1 = Pattern.compile(buffString);
+
+        view.print("Input customer ID pattern");
+        buffString = view.readAtr();
+        p2 = Pattern.compile(buffString);
+
+        view.print("Input tariff ID pattern");
+        buffString = view.readAtr();
+        p3 = Pattern.compile(buffString);
+
+        view.print("Input order date pattern");
+        buffString = view.readAtr();
+        p4 = Pattern.compile(buffString);
+
+        view.print("Input order sum pattern");
+        buffString = view.readAtr();
+        p5 = Pattern.compile(buffString);
+
+        for(Integer i: hm.keySet()){
+            if (p1.matcher(i.toString()).matches()
+                    && p2.matcher(String.valueOf(hm.get(i).getCustomernum())).matches()
+                    && p3.matcher(String.valueOf(hm.get(i).getTariffnum())).matches()
+                    && p4.matcher(String.valueOf(hm.get(i).getDate())).matches()
+                    && p5.matcher(String.valueOf(hm.get(i).getSum())).matches()
+                    ){
+                isFind = true;
+                view.print(hm.get(i).toString());
+            }
+        }
+        if(!isFind){
+            view.print("No rows find");
+        }
+        view.print("Press any key");
+        view.readAtr();
+        view.print(ACTION_MENU_STRING);
+    }
+
+    private void findTariff(){
+        boolean isFind = false;
+        String buffString;
+        Pattern p1,p2,p3,p4;
+        HashMap<Integer,Tariff> hm= ModelFacade.getInstance().getTariffs().getModIt();
+        view.print("Input tariff ID pattern");
+        buffString = view.readAtr();
+        p1 = Pattern.compile(buffString);
+
+        view.print("Input tariff name pattern");
+        buffString = view.readAtr();
+        p2 = Pattern.compile(buffString);
+
+        view.print("Input tariff cost pattern");
+        buffString = view.readAtr();
+        p3 = Pattern.compile(buffString);
+
+        view.print("Input tariff speed pattern");
+        buffString = view.readAtr();
+        p4 = Pattern.compile(buffString);
+
+        for(Integer i: hm.keySet()){
+            if (p1.matcher(i.toString()).matches()
+                    && p2.matcher(hm.get(i).getName()).matches()
+                    && p3.matcher(String.valueOf(hm.get(i).getCost())).matches()
+                    && p4.matcher(String.valueOf(hm.get(i).getSpeed())).matches())
+            {
+            isFind = true;
+            view.print(hm.get(i).toString());
+            }
+        }
+        if(!isFind){
+            view.print("No rows find");
+        }
+        view.print("Press any key");
+        view.readAtr();
+        view.print(ACTION_MENU_STRING);
+    }
+
+    private void findCustomer(){
+        boolean isFind = false;
+        String buffString;
+        Pattern p1,p2,p3,p4;
+        HashMap<Integer,Customer> hm= ModelFacade.getInstance().getCustomers().getModIt();
+        view.print("Input customer ID pattern");
+        buffString = view.readAtr();
+        p1 = Pattern.compile(buffString);
+
+        view.print("Input customer name pattern");
+        buffString = view.readAtr();
+        p2 = Pattern.compile(buffString);
+
+        view.print("Input phone number pattern");
+        buffString = view.readAtr();
+        p3 = Pattern.compile(buffString);
+
+        view.print("Input adress pattern");
+        buffString = view.readAtr();
+        p4 = Pattern.compile(buffString);
+
+        for(Integer i: hm.keySet()){
+            if (p1.matcher(i.toString()).matches()
+                    && p2.matcher(hm.get(i).getName()).matches()
+                    && p3.matcher(String.valueOf(hm.get(i).getPhonenum())).matches()
+                    && p4.matcher(hm.get(i).getAdress()).matches())
+            {
+                isFind = true;
+                view.print(hm.get(i).toString());
+            }
+        }
+        if(!isFind){
+            view.print("No rows find");
+        }
+        view.print("Press any key");
+        view.readAtr();
+        view.print(ACTION_MENU_STRING);
+    }
+
     private void addOrder() {
         Order order =new Order();
         String buffString;
@@ -235,7 +379,7 @@ public void analysis(String s){
         boolean isNum;
         boolean isAvailable = false;
         do {
-            view.print("Input id order");
+            view.print("Input order ID");
             buffString=view.readAtr();
             isNum = isNumber(buffString);
             if (isNum){
@@ -245,7 +389,7 @@ public void analysis(String s){
                 }
                 isAvailable = checkId(number,modelFacade.getOrders());
                 if (!isAvailable) {
-                    view.print("Id already exist");
+                    view.print("ID " + number + " already exist");
                 }
             }
         }while (!(isNum&&isAvailable));
@@ -253,7 +397,7 @@ public void analysis(String s){
         order.setNumber(number);
 
         do {
-            view.print("Input id customer");
+            view.print("Input customer ID");
             buffString=view.readAtr();
             isNum = isNumber(buffString);
             if (isNum){
@@ -263,7 +407,7 @@ public void analysis(String s){
                 }
                 isAvailable = checkId(number,modelFacade.getCustomers());
                 if (isAvailable) {
-                    view.print("Id customer not exist");
+                    view.print("Customer ID " + number + " is not exist");
                 }
             }
         }while (!(isNum&&!isAvailable));
@@ -271,7 +415,7 @@ public void analysis(String s){
         order.setCustomernum(number);
 
         do {
-            view.print("Input id tariff");
+            view.print("Input tariff ID");
             buffString = view.readAtr();
             isNum = isNumber(buffString);
             if (isNum) {
@@ -281,7 +425,7 @@ public void analysis(String s){
                 }
                 isAvailable = checkId(number, modelFacade.getTariffs());
                 if (isAvailable) {
-                    view.print("Id tariff not exist");
+                    view.print("Tariff ID " + number + "is not exist");
                 }
             }
         }while (!(isNum&&!isAvailable));
@@ -290,7 +434,7 @@ public void analysis(String s){
 
 
         do {
-            view.print("Input Date");
+            view.print("Input date");
             buffString=view.readAtr();
             if ((isNumber(buffString))&&(Integer.parseInt(buffString) == 0)) {
                 return;
@@ -316,7 +460,7 @@ public void analysis(String s){
         boolean isNum;
         boolean isAvailable=false;
         do {
-            view.print("Input id customer");
+            view.print("Input customer ID");
             buffString=view.readAtr();
             isNum = isNumber(buffString);
             if (isNum){
@@ -326,7 +470,7 @@ public void analysis(String s){
                 }
                 isAvailable = checkId(number,modelFacade.getCustomers());
                 if (!isAvailable) {
-                    view.print("Id already exist");
+                    view.print("ID " + number + " is already exist");
                 }
             }
         }while (!(isNum&&isAvailable));
@@ -334,7 +478,7 @@ public void analysis(String s){
         customer.setNumber(number);
 
         do {
-            view.print("Input name customer");
+            view.print("Input customer name");
             buffString=view.readAtr();
             if ((isNumber(buffString))&&(Integer.parseInt(buffString) == 0)) {
                 return;
@@ -344,7 +488,7 @@ public void analysis(String s){
         customer.setName(buffString);
 
         do {
-            view.print("Input phone customer");
+            view.print("Input customer phone number");
             buffString=view.readAtr();
             if ((isNumber(buffString))&&(Integer.parseInt(buffString) == 0)) {
                 return;
@@ -354,7 +498,7 @@ public void analysis(String s){
         customer.setPhonenum(buffString);
 
         do {
-            view.print("Input address customer");
+            view.print("Input customer address");
             buffString=view.readAtr();
             if ((isNumber(buffString))&&(Integer.parseInt(buffString) == 0)) {
                 return;
@@ -375,7 +519,7 @@ public void analysis(String s){
         boolean isNum;
         boolean isAvailable=false;
         do {
-            view.print("Input id tariff");
+            view.print("Input tariff ID");
             buffString=view.readAtr();
             isNum = isNumber(buffString);
             if (isNum){
@@ -385,14 +529,14 @@ public void analysis(String s){
                 }
                 isAvailable = checkId(number,modelFacade.getTariffs());
                 if (!isAvailable) {
-                    view.print("Id already exist");
+                    view.print("ID " + number + " is already exist");
                 }
             }
         }while (!(isNum&&isAvailable));
         tariff.setNumber(number);
 
         do {
-            view.print("Input name tariff");
+            view.print("Input tariff name");
             buffString=view.readAtr();
             if ((isNumber(buffString))&&(Integer.parseInt(buffString) == 0)) {
                 return;
@@ -432,7 +576,7 @@ public void analysis(String s){
         boolean isNum;
         boolean isAvailable=false;
         do{
-            view.print("input id order");
+            view.print("Input order ID");
             buffString=view.readAtr();
             isNum = isNumber(buffString);
             if (isNum){
@@ -442,17 +586,17 @@ public void analysis(String s){
                 }
                 isAvailable = checkId(number,modelFacade.getOrders());
                 if (isAvailable) {
-                    view.print("Id order not exist");
+                    view.print("Order ID " + number + " is not exist");
                 }
             }
         }while (!(isNum&&!isAvailable));
         Order order=modelFacade.getOrderById(Integer.parseInt(buffString));
-        view.print("Order id: "+order.getNumber()+
+        view.print("Order\nID: "+order.getNumber()+
                 "\nCustomer: "+modelFacade.getCustomerById(order.getCustomernum())+
                 "\nTariff: "+modelFacade.getTariffById(order.getTariffnum())+
                 "\nDate " + order.getDate()+
                 "\nSum: " + order.getSum());
-        view.print("Enter something than back prev menu");
+        view.print("Press any key");
         view.readAtr();
         view.print(ACTION_MENU_STRING);
     }
@@ -463,7 +607,7 @@ public void analysis(String s){
         boolean isNum;
         boolean isAvailable=false;
         do{
-            view.print("Input id customer");
+            view.print("Input customer ID");
             buffString=view.readAtr();
             isNum = isNumber(buffString);
             if (isNum){
@@ -473,16 +617,16 @@ public void analysis(String s){
                 }
                 isAvailable = checkId(number,modelFacade.getCustomers());
                 if (isAvailable) {
-                    view.print("Id customer not exist");
+                    view.print("Customer ID " + number + " is not exist");
                 }
             }
         }while (!(isNum&&!isAvailable));
         Customer customer=modelFacade.getCustomerById(Integer.parseInt(buffString));
-        view.print("Customer\nId: "+customer.getNumber()+
+        view.print("Customer\nID: "+customer.getNumber()+
                 "\nName:"+customer.getName()+
                 "\nPhone: "+customer.getPhonenum()+
                 "\nAddress: " +customer.getAdress());
-        view.print("Input something than back prev menu");
+        view.print("Press any key");
         view.readAtr();
         view.print(ACTION_MENU_STRING);
     }
@@ -493,7 +637,7 @@ public void analysis(String s){
         boolean isNum;
         boolean isAvailable=false;
         do{
-            view.print("Input id tariff");
+            view.print("Input tariff ID");
             buffString=view.readAtr();
             isNum = isNumber(buffString);
             if (isNum){
@@ -503,7 +647,7 @@ public void analysis(String s){
                 }
                 isAvailable = checkId(number,modelFacade.getTariffs());
                 if (isAvailable) {
-                    view.print("Id tariff not exist");
+                    view.print("Tariff ID " + number + " is not exist");
                 }
             }
         }while (!(isNum&&!isAvailable));
@@ -512,7 +656,7 @@ public void analysis(String s){
                 "\nName:"+tariff.getName()+
                 "\nSpeed: "+tariff.getSpeed()+
                 "\nCost: " +tariff.getCost());
-        view.print("Enter something than back prev menu");
+        view.print("Press any key");
         view.readAtr();
         view.print(ACTION_MENU_STRING);
     }

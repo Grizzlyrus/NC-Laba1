@@ -80,11 +80,11 @@ public class Order extends ModelItem {
     public String toString() {
         StringBuilder strbuild = new StringBuilder();
         DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-        return strbuild.append("Number ")
+        return strbuild.append("ID ")
                 .append(this.getNumber())
-                .append("; Customer num. ")
+                .append("; Customer ID ")
                 .append(this.getCustomernum())
-                .append("; Tariff num. ")
+                .append("; Tariff ID ")
                 .append(this.getTariffnum())
                 .append("; Date ")
                 .append(df.format(this.getDate()))
