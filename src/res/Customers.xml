@@ -10,5 +10,14 @@
                 <Adress>Samara</Adress>
             </value>
         </entry>
+        <entry>
+            <key>5678</key>
+            <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="customer">
+                <Number>5678</Number>
+                <Name>MegaQwerty</Name>
+                <Phone_number>2245699</Phone_number>
+                <Adress>Samara</Adress>
+            </value>
+        </entry>
     </modIt>
 </Collection>
