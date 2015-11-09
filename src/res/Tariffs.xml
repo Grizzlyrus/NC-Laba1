@@ -10,5 +10,32 @@
                 <Cost>350.0</Cost>
             </value>
         </entry>
+        <entry>
+            <key>9876</key>
+            <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="tariff">
+                <Number>9876</Number>
+                <Name>TariffName</Name>
+                <Speed>50.0</Speed>
+                <Cost>400.0</Cost>
+            </value>
+        </entry>
+        <entry>
+            <key>4567</key>
+            <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="tariff">
+                <Number>4567</Number>
+                <Name>RandomTariffName</Name>
+                <Speed>777.0</Speed>
+                <Cost>500.0</Cost>
+            </value>
+        </entry>
+        <entry>
+            <key>5678</key>
+            <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="tariff">
+                <Number>5678</Number>
+                <Name>VerySlow</Name>
+                <Speed>1.0</Speed>
+                <Cost>10.0</Cost>
+            </value>
+        </entry>
     </modIt>
 </Collection>
