@@ -6,7 +6,7 @@
             <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="customer">
                 <Number>1234</Number>
                 <Name>qwerty</Name>
-                <Phone_number>123547</Phone_number>
+                <Phone_number>8-800-555-35-35</Phone_number>
                 <Adress>Samara</Adress>
             </value>
         </entry>
@@ -15,7 +15,7 @@
             <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="customer">
                 <Number>1379</Number>
                 <Name>Name13</Name>
-                <Phone_number>93687463171</Phone_number>
+                <Phone_number>9368746317</Phone_number>
                 <Adress>Address</Adress>
             </value>
         </entry>
@@ -33,7 +33,7 @@
             <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="customer">
                 <Number>4567</Number>
                 <Name>Customer№13</Name>
-                <Phone_number>1313131313</Phone_number>
+                <Phone_number>8313131313</Phone_number>
                 <Adress>SomewhereHere</Adress>
             </value>
         </entry>
@@ -42,7 +42,7 @@
             <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="customer">
                 <Number>5678</Number>
                 <Name>MegaQwerty</Name>
-                <Phone_number>2245699</Phone_number>
+                <Phone_number>88462245699</Phone_number>
                 <Adress>Samara</Adress>
             </value>
         </entry>

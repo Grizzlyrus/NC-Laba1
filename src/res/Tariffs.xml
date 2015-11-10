@@ -38,4 +38,15 @@
             </value>
         </entry>
     </modIt>
+    <modIt>
+        <entry>
+            <key>1235</key>
+            <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="tariff">
+                <Number>1235</Number>
+                <Name>SuperSuperFast</Name>
+                <Speed>200.0</Speed>
+                <Cost>700.0</Cost>
+            </value>
+        </entry>
+    </modIt>
 </Collection>

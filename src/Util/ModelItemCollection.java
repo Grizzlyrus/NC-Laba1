@@ -6,7 +6,6 @@ import Model.Order;
 import Model.Tariff;
 
 import javax.xml.bind.annotation.*;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**

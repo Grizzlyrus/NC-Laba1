@@ -4,7 +4,6 @@ import Model.*;
 import Util.ModelFacade;
 import Util.ModelItemCollection;
 import View.View;
-import jdk.internal.util.xml.impl.Input;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -150,15 +149,12 @@ public void analysis(String s){
                 addRow();
                 break;
             case 3:
-                //TODO [3] Redact row
                 redactRow();
                 break;
             case 4:
-                //TODO [4] Delete row
                 deleteRow();
                 break;
             case 5:
-                //TODO [5] Find row
                 findRow();
                 break;
             case 6:
@@ -167,7 +163,6 @@ public void analysis(String s){
             case 7:
                 currentMenu=TABLE_MENU;
                 view.print(TABLE_MENU_STRING);
-                //TODO [7] <--Back
                 break;
         }
     }
@@ -221,7 +216,6 @@ public void analysis(String s){
     }
 
     private void redactRow() {
-        //TODO code here
         switch (currentTable){
             case ORDER_TABLE:
                 redactOrder();
@@ -252,7 +246,7 @@ public void analysis(String s){
                 break;
         }
         view.print("-------------------");
-        view.print("Enter enter than back prev menu");
+        view.print("Press any key");
         view.readAtr();
         view.print(ACTION_MENU_STRING);
     }
@@ -517,23 +511,6 @@ public void analysis(String s){
 
         view.print("-----------------------");
 
-       /* do {
-            view.print("Input order ID");
-            buffString=view.readAtr();
-            isNum = isNumber(buffString);
-            if (isNum){
-                number=Integer.parseInt(buffString);
-                if (number == 0) {
-                    return;
-                }
-                isAvailable = checkId(number,modelFacade.getOrders());
-                if (!isAvailable) {
-                    view.print("ID " + number + " already exist");
-                }
-            }
-        }while (!(isNum&&isAvailable));
-
-        order.setNumber(number);*/
         boolean isChange=true;
         do {
             view.print("Input customer ID");
@@ -612,7 +589,7 @@ public void analysis(String s){
         int number=0;
         boolean isAvailable=false;
         do {
-            view.print("input id order");
+            view.print("Input order ID");
             buffString=view.readAtr();
             isNum=isNumber(buffString);
             if (isNum) {
@@ -622,7 +599,7 @@ public void analysis(String s){
                 }
                 isAvailable = checkId(number,modelFacade.getOrders());
                 if (isAvailable) {
-                    view.print("This id order not exist");
+                    view.print("This order ID: " + number + " is not exist");
                 }
             }
         }while (!(isNum&&!isAvailable));
@@ -632,7 +609,7 @@ public void analysis(String s){
                 "\nTariff: "+modelFacade.getTariffById(order.getTariffnum())+
                 "\nDate " + order.getDate()+
                 "\nSum: " + order.getSum());
-        view.print("You want delete this order?");
+        view.print("Do you want to delete this order?");
         view.print("[1] Yes\n[2] No");
         do{
             buffString=view.readAtr();
@@ -671,7 +648,7 @@ public void analysis(String s){
                 }
                 isAvailable = checkId(number,modelFacade.getCustomers());
                 if (!isAvailable) {
-                    view.print("ID " + number + " is already exist");
+                    view.print("ID: " + number + " is already exist");
                 }
             }
         }while (!(isNum&&isAvailable));
@@ -729,7 +706,7 @@ public void analysis(String s){
                 }
                 isAvailable = checkId(number,modelFacade.getCustomers());
                 if (isAvailable) {
-                    view.print("Customer ID " + number + " is not exist");
+                    view.print("Customer ID: " + number + " is not exist");
                 }
             }
         }while (!(isNum&&!isAvailable));
@@ -797,7 +774,7 @@ public void analysis(String s){
         int number=0;
         boolean isAvailable=false;
         do {
-            view.print("input id customer");
+            view.print("Input customer ID");
             buffString=view.readAtr();
             isNum=isNumber(buffString);
             if (isNum) {
@@ -807,7 +784,7 @@ public void analysis(String s){
                 }
                 isAvailable = checkId(number,modelFacade.getCustomers());
                 if (isAvailable) {
-                    view.print("This id customer not exist");
+                    view.print("This customer ID: " + number + " not exist");
                 }
             }
         }while (!(isNum&&!isAvailable));
@@ -816,7 +793,7 @@ public void analysis(String s){
                 "\nName:" + customer.getName() +
                 "\nPhone: " + customer.getPhonenum() +
                 "\nAddress: " + customer.getAdress());
-        view.print("You want delete this customer?");
+        view.print("Do you want to delete this customer?");
         view.print("[1] Yes\n[2] No");
         do{
             buffString=view.readAtr();
@@ -854,7 +831,7 @@ public void analysis(String s){
                 }
                 isAvailable = checkId(number,modelFacade.getTariffs());
                 if (!isAvailable) {
-                    view.print("ID " + number + " is already exist");
+                    view.print("ID: " + number + " is already exist");
                 }
             }
         }while (!(isNum&&isAvailable));
@@ -911,7 +888,7 @@ public void analysis(String s){
                 }
                 isAvailable = checkId(number,modelFacade.getTariffs());
                 if (isAvailable) {
-                    view.print("Tariff ID " + number + " is not exist");
+                    view.print("Tariff ID: " + number + " is not exist");
                 }
             }
         }while (!(isNum&&!isAvailable));
@@ -998,7 +975,7 @@ public void analysis(String s){
                 "\nName:"+tariff.getName()+
                 "\nSpeed: "+tariff.getSpeed()+
                 "\nCost: " +tariff.getCost());
-        view.print("You want delete this tariff?");
+        view.print("Do you want to delete this tariff?");
         view.print("[1] Yes\n[2] No");
         do{
             buffString=view.readAtr();
@@ -1035,7 +1012,7 @@ public void analysis(String s){
                 }
                 isAvailable = checkId(number,modelFacade.getOrders());
                 if (isAvailable) {
-                    view.print("Order ID " + number + " is not exist");
+                    view.print("Order ID: " + number + " is not exist");
                 }
             }
         }while (!(isNum&&!isAvailable));
@@ -1066,7 +1043,7 @@ public void analysis(String s){
                 }
                 isAvailable = checkId(number,modelFacade.getCustomers());
                 if (isAvailable) {
-                    view.print("Customer ID " + number + " is not exist");
+                    view.print("Customer ID: " + number + " is not exist");
                 }
             }
         }while (!(isNum&&!isAvailable));
@@ -1096,7 +1073,7 @@ public void analysis(String s){
                 }
                 isAvailable = checkId(number,modelFacade.getTariffs());
                 if (isAvailable) {
-                    view.print("Tariff ID " + number + " is not exist");
+                    view.print("Tariff ID: " + number + " is not exist");
                 }
             }
         }while (!(isNum&&!isAvailable));
@@ -1132,9 +1109,15 @@ public void analysis(String s){
 
 
     private boolean checkPhone(String buffString) {
-        //TODO add check phone
+        Pattern p1, p2;
+        p1 = Pattern.compile("^(8-)?\\d{3}-\\d{3}-\\d{2}-\\d{2}$");
+        p2 = Pattern.compile("^(8-)?\\d{10}$");
+
         if (buffString.trim().equals("")) {
             view.print("Input text should not be empty");
+            return true;
+        } else if(!p1.matcher(buffString).matches() || !p2.matcher(buffString).matches()){
+            view.print("Incorrect phone number format");
             return true;
         }
         return false;
